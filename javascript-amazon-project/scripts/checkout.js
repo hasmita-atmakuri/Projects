@@ -3,10 +3,24 @@ import { renderPaymetSummary } from "./checkout/paymentSummary.js";
 import { loadProducts,loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
+async function loadPage(){
+
+  await loadProductsFetch();
+
+  const value= await new Promise((resolve)=>{
+    loadCart(()=>{
+      resolve('value2');
+    });
+  })
+
+  renderOrderSummary();
+  renderPaymetSummary();
+}
+loadPage();
 
 //import '../data/cart-class.js';
 //import '../data/backend-practice.js';
-
+/*
 Promise.all([
   loadProductsFetch(),
   new Promise((resolve)=>{
@@ -20,6 +34,8 @@ Promise.all([
   renderOrderSummary();
   renderPaymetSummary();
 });
+
+*/
 /*
 new Promise((resolve)=> {
   loadProducts(()=>{
